@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<% include ../libcss %>
+<% include ../meta %>
+</head>
+<body>
+<% include ../header %>
+  <main>
+    <div class="container space-sections">
+      <div class="row">
+        <nav>
+          <div class="nav-wrapper green darken-1">
+            <div class="col s12">
+              <a href="/contatos" class="breadcrumb">Contatos</a>
+            </div>
+          </div>
+        </nav>
+      </div>
+      <div class="row">
+        <div class="col s12 m12 l12">
+          <form action="/contato" method="post">
+            <input type="hidden" name="_csrf" value="<%- _csrf %>">
+            <div class="row">
+              <div class="input-field col s12">
+                <i class="material-icons prefix">account_circle</i>
+                <input required id="icon_prefix" type="text" name="contato[nome]" class="validate">
+                <label for="icon_prefix" data-error="Nome&nbsp;inválido." data-success='Nome&nbsp;válido.'>Nome</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <i class="material-icons prefix">email</i>
+                <input required id="email" type="email" name="contato[email]" class="validate">
+                <label for="icon_prefix" data-error="Email&nbsp;inválido." data-success="Email&nbsp;válido.">E-mail</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col s12">
+                <button type="submit" class="waves-effect waves-light btn">Cadastrar</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12 m12 l12">
+          <table>
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th class="hide-on-small-only">E-mail</th>
+                <th>Status</th>
+                <th>Ação</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% contatos.forEach(function(contato) { %>
+              <tr>
+                <td><%- contato.nome %></td>
+                <td class="hide-on-small-only"><%- contato.email %></td>
+                <td>
+                  <span id="notify_<%- contato.email %>">Offline</span>
+                </td>
+                <td>
+                  <a href="/contato/<%- contato._id %>">Detalhes</a>
+                </td>
+                <td>
+                  <a href="/chat" id="chat_<%- contato.email %>">Conversar</a>
+                </td>
+              </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+<% include ../footer %>
+<% include ../libjs %>
+  <script>
+    var socket = io('');
+    
+    var notify = function(data) {
+      var id = 'notify_' + data.email;
+      var notify = document.getElementById(id);
+      if (notify) {
+        notify.textContent = data.msg;
+      }
+    };
+    
+    socket.on('notify-onlines', function(email) {
+      notify({email: email, msg: 'Online'});
+    })
+    
+    socket.on('notify-offlines', function(email) {
+      notify({email: email, msg: 'Offline'});
+    })
+    
+    socket.on('new-message', function(data) {
+      notify({email: data.email, msg: 'Mensagem'});
+      var id = 'chat_' + data.email;
+      var chat = document.getElementById(id);
+      chat.href += '?sala=' + data.sala;
+    });
+  </script>
+</body>
+</html>

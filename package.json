@@ -1,0 +1,33 @@
+{
+  "name": "ntalk",
+  "description": "Node talk - Agenda de contatos",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "compression": "^1.6.2",
+    "connect-redis": "^3.0.2",
+    "cookie-parser": "^1.4.1",
+    "csurf": "^1.9.0",
+    "debug": ">1.0.0",
+    "ejs": "^1.0.0",
+    "express": "^4.13.4",
+    "express-load": "^1.1.15",
+    "express-session": "^1.13.0",
+    "forever-monitor": "^1.7.0",
+    "method-override": "^2.3.5",
+    "mongoose": "^4.4.10",
+    "redis": "^2.6.0-1",
+    "socket.io": "^1.4.5",
+    "socket.io-redis": "^1.0.0"
+  },
+  "devDependencies": {
+    "mocha": "^2.4.5",
+    "should": "^8.3.1",
+    "supertest": "^1.2.0"
+  },
+  "scripts": {
+    "start": "DEBUG=* node server",
+    "test": "NODE_ENV=test ./node_modules/.bin/mocha test/**/*.js"
+  }
+}

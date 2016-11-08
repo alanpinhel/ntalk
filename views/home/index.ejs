@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<% include ../libcss %>
+<% include ../meta %>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col s12">
+        <h1 class="content-center">Ntalk</h1>
+        <h4 class="content-center">Bem-vindo!</h4>
+      </div>
+    </div>
+    <form action="/entrar" method="post">
+      <input type="hidden" name="_csrf" value="<%- _csrf %>">
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">account_circle</i>
+          <input required id="icon_prefix" type="text" name="usuario[nome]" class="validate">
+          <label for="icon_prefix" data-error="Nome&nbsp;inválido." data-success='Nome&nbsp;válido.'>Nome</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">email</i>
+          <input required id="email" type="email" name="usuario[email]" class="validate">
+          <label for="icon_prefix" data-error="Email&nbsp;inválido." data-success="Email&nbsp;válido.">E-mail</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12">
+          <button type="submit" class="waves-effect waves-light btn">Entrar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+<% include ../libjs %>
+</body>
+</html>

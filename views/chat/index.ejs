@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<% include ../libcss %>
+<% include ../meta %>
+</head>
+<body>
+<% include ../header %>
+  <main>
+    <div class="container space-sections">
+      <div class="row">
+        <nav>
+          <div class="nav-wrapper green darken-1">
+            <div class="col s12 m12 l12">
+              <a href="/contatos" class="breadcrumb">Contatos</a>
+              <a class="breadcrumb">Conversar</a>
+            </div>
+          </div>
+        </nav>
+      </div>
+      <div class="row">
+        <div class="col s12 m12 l12">
+          <div class="row">
+            <div id="chat"></div>
+          </div>
+          <div class="row">
+            <input type="text" id="msg" placeholder="Mensagem">
+          </div>
+          <div class="row">
+            <button class="waves-effect waves-light btn" onclick="enviar();">Enviar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+<% include ../footer %>
+<% include ../libjs %>
+  <script>
+    var socket = io.connect('');
+    
+    socket.emit('join', '<%- sala %>');
+    
+    socket.on('send-client', function(msg) {
+      document.getElementById('chat').innerHTML += msg;
+    });
+    
+    var enviar = function() {
+      var msg = document.getElementById('msg');
+      socket.emit('send-server', msg.value);
+      msg.value = '';
+      msg.focus();
+    };
+  </script>
+</body>
+</html>

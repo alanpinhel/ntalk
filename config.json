@@ -1,0 +1,15 @@
+{
+  "SECRET": "Ntalk",
+  "KEY": "ntalk.sid",
+  "MONGODB": {
+    "test": "mongodb://localhost:27017/ntalk_test",
+    "development": "mongodb://localhost:27017/ntalk"
+  },
+  "REDIS": {
+    "host": "127.0.0.1",
+    "port": 6379
+  },
+  "CACHE": {
+    "maxAge": 3600000
+  }
+}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<% include ../libcss %>
+<% include ../meta %>
+</head>
+<body>
+<% include ../header %>
+  <main>
+    <div class="container space-sections">
+      <div class="row">
+        <nav>
+          <div class="nav-wrapper green darken-1">
+            <div class="col s12">
+              <a href="/contatos" class="breadcrumb">Contatos</a>
+              <a <a href="/contato/<%- contato._id %>" class="breadcrumb">Detalhes</a>
+              <a class="breadcrumb">Editar</a>
+            </div>
+          </div>
+        </nav>
+      </div>
+      <div class="row">
+        <div class="col s12 m12 l12">
+          <form action="/contato/<%- contato._id %>?_method=put" method="post">
+            <input type="hidden" name="_csrf" value="<%- _csrf %>">
+            <div class="row">
+              <div class="input-field col s12">
+                <i class="material-icons prefix">account_circle</i>
+                <input required id="icon_prefix" type="text" name="contato[nome]" class="validate" value="<%- contato.nome %>">
+                <label for="icon_prefix" data-error="Nome&nbsp;inválido." data-success='Nome&nbsp;válido.'>Nome</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <i class="material-icons prefix">email</i>
+                <input required id="email" type="email" name="contato[email]" class="validate" value="<%- contato.email %>">
+                <label for="icon_prefix" data-error="Email&nbsp;inválido." data-success="Email&nbsp;válido.">E-mail</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col s12 m12 l12">
+                <button class="waves-effect waves-light btn" type="submit">Atualizar</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+<% include ../footer %>
+<% include ../libjs %>
+</body>
+</html>

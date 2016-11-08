@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<% include libcss %>
+<% include meta %>
+</head>
+<body>
+  <main>
+    <div class="container content-center">
+      <div class="row">
+        <div class="col s12">
+          <h1>Ntalk</h1>
+          <h4>Aconteceu algo terrível! :(</h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12">
+          <p>Veja detalhes do erro:</p>
+          <p><%- error.message %></p>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="row">
+        <div class="col s12">
+          <p>Vamos voltar à <a href="/">página inicial?</a></h4>
+        </div>
+      </div>
+    </div>
+  </main>
+<% include libjs %>
+</body>
+</html>
